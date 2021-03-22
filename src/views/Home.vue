@@ -1,68 +1,96 @@
 <template>
-  <ion-page>
-    <ion-header :translucent="true">
+ <ion-page>
+  <ion-header>
       <ion-toolbar>
-        <ion-title>Blank</ion-title>
+          <ion-title>Home</ion-title>
       </ion-toolbar>
-    </ion-header>
-    
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
-        </ion-toolbar>
       </ion-header>
-    
-      <div id="container">
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-      </div>
-    </ion-content>
+ <ion-grid>
+      <ion-row>
+        <ion-col>
+    <IonContent>
+      <ion-card>
+        <img src="https://media.discordapp.net/attachments/749118010576601138/823314768126410782/340.png?width=301&height=473"/>
+        <ion-card-header>
+          <ion-card-subtitle>categoria</ion-card-subtitle>
+          <ion-card-title>Nombre del libro</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Lo que podra encontrar y su precio
+        </ion-card-content>
+        <ion-button expand="block" v-on:click="createModal" @modal="dismissModal">Ver libro</ion-button>
+      </ion-card>
+    </IonContent>
+    </ion-col>
+    <ion-col>
+    <IonContent>
+      <ion-card>
+        <img src="https://media.discordapp.net/attachments/749118010576601138/823314849428799508/ee49eed247bca0c2d7fce016d69d45ff.png?width=300&height=473"/>
+        <ion-card-header>
+          <ion-card-subtitle>categoria</ion-card-subtitle>
+          <ion-card-title>Nombre del libro</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Lo que podra encontrar y su precio
+        </ion-card-content>
+        <ion-button expand="block" v-on:click="createModal" @modal="dismissModal">Ver libro</ion-button>
+      </ion-card>
+    </IonContent>
+    </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-page>
 </template>
-
-<script lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+<script>//@ts-nocheck
+import {  IonPage, IonGrid, IonRow, IonCol, IonHeader, IonContent, IonCard, IonToolbar, IonButton, IonCardContent, IonCardSubtitle ,IonCardTitle, IonTitle, modalController } from "@ionic/vue"
+import Modal from '../components/Modal.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'Home',
-  components: {
+  component: {
+    IonPage,
+    IonGrid, 
+    IonRow,
+    IonCol,
+    IonButton,
+    IonCard,
+    IonCardSubtitle,
+    IonCardTitle,
     IonContent,
     IonHeader,
-    IonPage,
+    IonToolbar,
+    IonCardContent,
     IonTitle,
-    IonToolbar
+    Modal
+  },
+  /*
+  setup(){
+    return{
+      currentModal: null,
+    }
+  },*/
+
+  methods:{
+    async createModal(){
+      const modal = await modalController.create({
+        component: Modal,
+        componentProps: {
+          modal_value: null 
+        },
+      })
+      modal.componentProps.modal_value = modal;
+      return modal.present();
+    },
+    dismissModal(){
+      let currentModal = this.modal;
+      currentModal.dismiss().then(() => { currentModal = null; });
+    }
   }
 });
 </script>
-
-<style scoped>
-#container {
-  text-align: center;
-  
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  
-  color: #8c8c8c;
-  
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+<style>
+img{
+  height: 200px;
 }
 </style>
