@@ -2,29 +2,35 @@
 <ion-page>
     <ion-tabs>
       <ion-tab-bar slot="bottom">
+
       <router-link to="/Home">
+        <ion-button shape="round" color="medium" size="small">
         <ion-icon :icon="home" />
-        <ion-label>Home</ion-label>
+        </ion-button>
       </router-link>
 
       <router-link to="/tab2">
+      <ion-button shape="round" color="medium" size="small">
         <ion-icon :icon="grid" />
-        <ion-label>Catalogos</ion-label>
+      </ion-button>
       </router-link>
           
-    <router-link to="/tab3">
+      <router-link to="/tab3">
+      <ion-button shape="round" color="medium" size="small">
         <ion-icon :icon="helpCircle" />
-        <ion-label>Informacion</ion-label>
+      </ion-button>
       </router-link>
+
       </ion-tab-bar>
     </ion-tabs>
   </ion-page>
 </template>
+
 <script>
 import {
   IonTabBar,
   IonTabs,
-  IonLabel,
+  IonButton,
   IonIcon,
   IonPage,
 } from "@ionic/vue";
@@ -32,7 +38,7 @@ import { grid, helpCircle, home } from "ionicons/icons";
 
 export default {
   name: "Pestanas",
-  components: { IonLabel, IonTabs, IonTabBar, IonIcon, IonPage },
+  components: {  IonButton, IonTabs, IonTabBar, IonIcon, IonPage },
   setup() {
     return {
       grid,
